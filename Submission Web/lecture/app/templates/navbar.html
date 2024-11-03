@@ -1,0 +1,24 @@
+  <nav class="navbar bg-dark border-bottom border-body text-white navbar-dark">
+  <a class="navbar-brand text-white" href="#">Coursework</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse text-white" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item text-white{% if request.path == url_for('all_tasks') %}active{% endif %}">
+        <a class="nav-link text-white" href="{{ url_for('all_tasks') }}">All Tasks</a>
+      </li>
+      <li class="nav-item {% if request.path == url_for('uncompleted_tasks') %}active{% endif %}">
+        <a class="nav-link text-white" href="{{ url_for('uncompleted_tasks') }}">Uncompleted</a>
+      </li>
+      <li class="nav-item {% if request.path == url_for('completed_tasks') %}active{% endif %}">
+        <a class="nav-link text-white " href="{{ url_for('completed_tasks') }}">Completed</a>
+      </li>
+      <li class="nav-item text-white{% if request.path == url_for('add_user') %}active{% endif %}">
+        <a class="nav-link text-white" href="{{ url_for('add_user') }}">Add Task</a>
+      </li>
+    </ul> 
+  </div>
+</nav>
+<!-- Here we create our navbar which allows the user to easily travel accross all pages -->

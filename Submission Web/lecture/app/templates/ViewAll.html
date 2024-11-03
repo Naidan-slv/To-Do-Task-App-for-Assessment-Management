@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block title %}All Tasks{% endblock %}
+{% block content %}
+
+{% for message in get_flashed_messages() %}
+    <div class="alert alert-secondary alert-dismissible fade show" role="alert">
+        {{ message }}
+        
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+{% endfor %}
+
+
+
+<h1 class="text-monospace font-weight-bold "> <u>All Tasks</u></h1>
+<br>
+
+<div class="">
+    {% if tasks %}
+        {% for task in tasks %}
+            <div class="container shadow p-5 mb-5 bg-light rounded">
+                <div>
+                    <h3 class="font-weight-bold">{{ task.assesement_title }}</h3>
+                </div>
+                <div>
+                    <strong>Module Code:</strong> {{ task.module_code }}
+                </div>
+                <div>
+                    <strong>Deadline:</strong> {{ task.deadline }}
+                </div>
+                <div class="text-wrap text-break">
+                    <strong>Description:</strong> {{ task.description }}
+                </div>
+                <div>
+                    <strong>Completed:</strong> {{ task.completed }}
+                </div>
+                <br>
+                <div>
+                    <a class="btn btn-primary btn-sm" href="{{ url_for('edit', id=task.id) }}">Edit</a>
+                    <form action="{{ url_for('delete', id=task.id, next=request.url) }}" method="post" style="display:inline;">
+                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                    </form>
+                </div>
+            </div>
+            <br>
+        {% endfor %}
+    {% else %}
+        <div class="alert alert-secondary d-flex justify-content-center" role="alert">
+            Please add a Task!
+        </div>
+    {% endif %}
+</div>
+
+{% endblock %}

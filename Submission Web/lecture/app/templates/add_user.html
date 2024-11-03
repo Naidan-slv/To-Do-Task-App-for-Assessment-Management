@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% block title %}What We Do{% endblock %}
+
+{% block content %}
+    {% for message in get_flashed_messages() %}
+        <div class="alert alert-secondary alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    {% endfor %}
+
+    {% if name %}
+        <h1>Add User Page !!!</h1>
+    {% else %}
+        <h1 class="text-monospace font-weight-bold "> <u>Add Task</u></h1>
+        <br>
+        <div class="shadow p-3 mb-5 bg-white rounded">
+            <form method="POST" action="{{ url_for('add_user') }}">
+                {{ form.hidden_tag() }}
+
+                <div class="form-group">
+                    {{ form.assesement_title.label(class="form-label") }}
+                    {{ form.assesement_title(class="form-control", required=True) }}
+                    {% for error in form.assesement_title.errors %}
+                        <div class="text-danger">[{{ error }}]</div>
+                    {% endfor %}
+                </div>
+                <br>
+
+                <div class="form-group">
+                    {{ form.module_code.label(class="form-label") }}
+                    {{ form.module_code(class="form-control", required=True) }}
+                    {% for error in form.module_code.errors %}
+                        <div class="text-danger">[{{ error }}]</div>
+                    {% endfor %}
+                </div>
+                <br>
+
+                <div class="form-group">
+                    {{ form.deadline.label(class="form-label") }}
+                    {{ form.deadline(class="form-control", required=True, type="date") }}
+                    {% for error in form.deadline.errors %}
+                        <div class="text-danger">[{{ error }}]</div>
+                    {% endfor %}
+                </div>
+                <br>
+
+                <div class="form-group">
+                    {{ form.description.label(class="form-label") }}
+                    {{ form.description(class="form-control", required=True) }}
+                    {% for error in form.description.errors %}
+                        <div class="text-danger">[{{ error }}]</div>
+                    {% endfor %}
+                </div>
+                <br>
+
+                <div class="form-group">
+                    {{ form.submit(class="btn btn-secondary") }}
+                </div>
+            </form>
+        </div>
+    {% endif %}
+<br><br>
+{% endblock %}

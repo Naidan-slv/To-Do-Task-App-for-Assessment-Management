@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% block title %}Update{% endblock %}
+
+{% block content %}
+
+<!-- Here we create a loop that will display all the completed tasks in the database, first we need to check if there is anything
+ present and if there isnt we can provide a custom alert to let the user know that it is empty -->
+    {% if name %}
+        <h1>Update User Page !!!</h1>
+    {% else %}
+        <h1 class="text-monospace font-weight-bold "> <u>Update Task</u></h1>
+        <br>
+        <div class="shadow p-3 mb-5 bg-white rounded">
+            <form method="POST" action="{{ url_for('edit', id = task_to_edit.id) }}">
+                {{ form.hidden_tag() }}
+
+                <div class="form-group">
+                    {{ form.assesement_title.label(class="form-label") }}
+                    {{ form.assesement_title(class="form-control", required=True, value = task_to_edit.assesement_title) }}
+                    {% for error in form.assesement_title.errors %}
+                        <div class="text-danger">[{{ error }}]</div>
+                    {% endfor %}
+                </div>
+                <br>
+
+                <div class="form-group">
+                    {{ form.module_code.label(class="form-label") }}
+                    {{ form.module_code(class="form-control", required=True, value = task_to_edit.module_code) }}
+                    {% for error in form.module_code.errors %}
+                        <div class="text-danger">[{{ error }}]</div>
+                    {% endfor %}
+                </div>
+                <br>
+
+                <div class="form-group">
+                    {{ form.deadline.label(class="form-label") }}
+                    {{ form.deadline(class="form-control", required=True, type="date", value = task_to_edit.deadline) }}
+                    {% for error in form.deadline.errors %}
+                        <div class="text-danger">[{{ error }}]</div>
+                    {% endfor %}
+                </div>
+                <br>
+
+                <div class="form-group">
+                        {{ form.description.label(class="form-label") }}
+                        {{ form.description(class="form-control", required=True, value = task_to_edit.description) }}
+                        {% for error in form.description.errors %}
+                            <div class="text-danger">[{{ error }}]</div>
+                        {% endfor %} 
+                        <div class="d-flex align-items-center m-3">
+                            <div class="m-3">
+                                <span class="font-weight-bold">{{ form.completed.label(class="form-label") }}</span>
+                            </div>
+                            <div class="m-3">
+                                {{ form.completed(class="form-control", required= False, value = task_to_edit.completed) }}
+                                {% for error in form.completed.errors %}
+                                    <div class="text-danger">[{{ error }}]</div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                </div>
+
+                <div class="form-group">
+                    {{ form.submit(class="btn btn-secondary") }}
+                </div>
+            </form>
+        </div>
+    {% endif %}
+<br><br>
+{% endblock %}

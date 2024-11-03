@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block title %}Completed Tasks{% endblock %}
+{% block content %}
+
+
+<h1 class="text-monospace font-weight-bold "> <u>Completed Tasks</u></h1>
+<br>
+<!-- Here we create a loop that will display all the completed tasks in the database, first we need to check if there is anything
+ present and if there isnt we can provide a custom alert to let the user know that it is empty -->
+<div>
+   {% if tasks %}
+        {% for task in tasks %}
+            <div class="container shadow p-5 mb-5 bg-light rounded">
+                <div>
+                    <h3 class="font-weight-bold">{{ task.assesement_title }}</h3>
+                </div>
+                <div>
+                    <strong>Module Code:</strong> {{ task.module_code }}
+                </div>
+                <div>
+                    <strong>Deadline:</strong> {{ task.deadline }}
+                </div>
+                <div class="text-wrap text-break">
+                    <strong>Description:</strong> {{ task.description }}
+                </div>
+                <div>
+                    <strong>Completed:</strong> {{ task.completed }}
+                </div>
+                <br>
+                <div>
+                    <a class="btn btn-primary btn-sm" href="{{ url_for('edit', id=task.id) }}">Edit</a>
+                    <form action="{{ url_for('delete', id=task.id, next=request.url) }}" method="post" style="display:inline;">
+                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                    </form>
+                </div>
+            </div>
+            <br>
+        {% endfor %}
+    {% else %}
+        <div class="alert alert-secondary d-flex justify-content-center" role="alert">
+            Please add a Completed Task!
+        </div>
+    {% endif %} 
+</div>
+
+{% endblock %}
